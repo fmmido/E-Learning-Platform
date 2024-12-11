@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Day</title>
+    <style>
+        @font-face {
+            font-family: 'Metropolis';
+            src: url('https://www.fontsquirrel.com/fonts/download/metropolis') format('woff2');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Metropolis', Arial, sans-serif;
+            background: linear-gradient(135deg, #766ce7, #fd881f);
+            color: white;
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: transparent;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: #766ce7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Metropolis', sans-serif;
+            font-weight: bold;
+            color: white;
+            font-size: 24px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 600; /* SemiBold */
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+            height: 100vh;
+        }
+
+        .hero-text {
+            max-width: 50%;
+        }
+
+        .hero-text h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            font-weight: 900; /* Black */
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            font-weight: 400; /* Regular */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: white;
+            color: #766ce7;
+            text-transform: uppercase;
+            font-weight: 800; /* Extra Bold */
+            border-radius: 30px;
+            text-decoration: none;
+        }
+
+        .hero-image {
+            width: 40%;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="logo">LOGO</div>
+            <nav class="nav">
+                <a href="#">Home</a>
+                <a href="#">Classroom</a>
+                <a href="#">Course</a>
+                <a href="#">About</a>
+                <a href="#">Login</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Education Day</h1>
+            <p>Learn anytime, anywhere with [platform name]! Our educational platform gives you complete flexibility in managing your time and study schedule. Benefit from our comprehensive library of interactive lectures, scientific articles, and practical assignments. We believe that learning should be fun and effective.</p>
+            <a href="#" class="btn">Sign Up</a>
+        </div>
+        <div class="hero-image">
+            <img src="The interface image.png" alt="Open Book">
+        </div>
+    </section>
+</body>
+</html>
