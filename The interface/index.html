@@ -7,7 +7,7 @@
     <style>
         @font-face {
             font-family: 'Metropolis';
-            src: url('https://www.fontsquirrel.com/fonts/download/metropolis') format('woff2');
+            src: url('https://www.fontsquirrel.com/fonts/download/metropolis') format('truetype');
         }
 
         * {
@@ -32,16 +32,21 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-circle {
             width: 80px;
             height: 80px;
             background-color: #766ce7;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Metropolis', sans-serif;
-            font-weight: bold;
             color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-weight: bold;
             font-size: 24px;
         }
 
@@ -108,16 +113,16 @@
 </head>
 <body>
     <header class="header">
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <div class="logo">LOGO</div>
-            <nav class="nav">
-                <a href="#">Home</a>
-                <a href="#">Classroom</a>
-                <a href="#">Course</a>
-                <a href="#">About</a>
-                <a href="#">Login</a>
-            </nav>
+        <div class="logo">
+            <div class="logo-circle">LOGO</div>
         </div>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#">Classroom</a>
+            <a href="#">Course</a>
+            <a href="#">About</a>
+            <a href="#">Login</a>
+        </nav>
     </header>
     
     <section class="hero">
