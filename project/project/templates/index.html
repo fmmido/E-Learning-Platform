@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <!-- Title of the page -->
+    <title>E-Learning Platform</title>
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+       <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <!-- Link to external CSS -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <!-- Navigation bar brand -->
+        <a class="navbar-brand" href="{% url 'index' %}">E-Learning</a>
+          <!-- Navigation bar toggler button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+         <!-- Navigation bar content -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                   <!-- Check if the user is logged in -->
+                {% if user.is_authenticated %}
+                    <!-- Navigation item welcome with username-->
+                    <li class="nav-item">
+                        <span class="nav-link">Welcome, {{ user.username }}</span>
+                    </li>
+                      <!-- Navigation item link to my courses-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'my_courses' %}">My Courses</a>
+                    </li>
+                      <!-- Navigation item link to sign out-->
+                    <li class="nav-item">
+                         <a class="nav-link" href="{% url 'signout' %}">Sign Out</a>
+                    </li>
+                     <!-- If the user is not logged in -->
+                {% else %}
+                     <!-- Navigation item link to sign up-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                     <!-- Navigation item link to sign in-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signin' %}">Sign In</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+      <!-- main container-->
+    <div class="container">
+          <!-- Background for main page-->
+        <div class="Background" style="display: flex; align-items: center; padding: 2em; background-color: rgba(255,255,255,0.7); border-radius: 15px;">
+            <!-- Text content container-->
+            <div style="flex: 1; padding-right: 20px; background-color: rgba(255,255,255,0.7); padding: 20px; border-radius: 10px;">
+                  <!-- Heading for page -->
+                <h1 class="display-4">Welcome to Our E-Learning Platform</h1>
+                 <!-- lead paragraph-->
+                <p class="lead">Start learning today and enhance your skills.</p>
+                <!-- separator -->
+                <hr class="my-4">
+                   <!-- small paragraph-->
+                <p>Browse our courses and enroll to begin your journey.</p>
+                <!-- browse course button-->
+                <a class="btn btn-primary btn-lg" href="{% url 'course_list' %}" role="button">Browse Courses</a>
+            </div>
+            <!-- image for the main page-->
+            <img src="/static/images/background.png" alt="Background Image" style="width: 100%; max-width: 400px; height: auto; margin-left: 20px;">
+        </div>
+    </div>
+      <!-- Javascript libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

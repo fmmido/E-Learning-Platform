@@ -1,22 +1,24 @@
-"""
-URL configuration for project project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+# your_project/urls.py
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
+# The urlpatterns list defines the URL routes for the entire project
 urlpatterns = [
+    # This line includes URL patterns from Django's admin app
+    # It makes the admin site accessible
     path('admin/', admin.site.urls),
+
+    # This line includes URL patterns from your app's (spApp) urls.py
+    # This allows your app's URL definitions to be included in this file.
+    path('', include('spApp.urls')), # 'spApp' is your app name
 ]
+
+# Check if DEBUG mode is enabled in your project's settings
+if settings.DEBUG:
+    # If the project is running in DEBUG mode
+    # This code will serve media files
+    # settings.MEDIA_URL is the URL to access your media files (/media/)
+    # document_root=settings.MEDIA_ROOT is where the files are located on the server
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

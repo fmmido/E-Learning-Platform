@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ course.title }} Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Link to our external CSS -->
+    <style>
+        /* Styles for the main container of the course detail page */
+         .course-detail-container {
+           margin-top: 20px; /* Adds some spacing from the top */
+          max-width: 800px;  /* Sets the maximum width */
+            margin-left: auto;  /* Centers container horizontally */
+          margin-right: auto; /* Centers container horizontally */
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+             padding: 20px; /* Sets padding */
+              border-radius: 10px; /* Sets rounded corners */
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);  /* Adds a layerd box shadow */
+        }
+        /* Style for the course title */
+        .course-detail-container h1 {
+            text-align: center;  /* Centers the heading */
+            color: #3767cf;    /* Sets color of the header */
+             font-weight: 600;
+             margin-bottom: 20px;   /* Adds some spacing from the bottom */
+        }
+         /* Style for the image */
+        .course-detail-container img {
+            display: block; /* Make image a block element */
+             margin-left: auto;  /* Centers image horizontally */
+           margin-right: auto;   /* Centers image horizontally */
+            max-width: 50%;
+             height: auto;
+        }
+        /* Style for the course description */
+       .course-detail-container p {
+          color: #5e5e5e; /* Text color*/
+           margin-bottom: 20px; /* Add some bottom spacing*/
+          line-height: 1.6; /* Add line spacing*/
+        }
+         /* Style for the enroll button */
+        .course-detail-container .btn-success {
+             background-color: #28a745 !important; /* Sets success button background color */
+             border-color: #28a745 !important; /* Sets border color*/
+         }
+           /* Style for lesson title */
+        .course-detail-container h2 {
+            margin-top: 30px;  /* Add some spacing at the top*/
+             color: #3767cf; /* Set text color */
+            font-weight: 600;  /* Bold weight */
+
+        }
+         /* Style for lessons list*/
+         .course-detail-container ul {
+             padding-left: 20px; /* Add left padding to list */
+            list-style-type: none; /* removes bullets*/
+         }
+        /* Style for lessons list item */
+         .course-detail-container li {
+             margin-bottom: 10px; /* Adds spacing from the bottom*/
+         }
+         /* Style for lesson links */
+         .course-detail-container li a {
+              color: #3767cf; /* Set color */
+            text-decoration: none;  /* removes text decoration */
+         }
+       /* Style for lessons links on hover */
+         .course-detail-container li a:hover {
+             text-decoration: underline; /* Underlines link on hover*/
+         }
+    </style>
+</head>
+<body>
+     <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="{% url 'index' %}">E-Learning</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- if the user is logged in-->
+                {% if user.is_authenticated %}
+                     <li class="nav-item">
+                        <span class="nav-link">Welcome, {{ user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'my_courses' %}">My Courses</a>
+                    </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="{% url 'signout' %}">Sign Out</a>
+                     </li>
+                    <!-- if user is not logged in-->
+                {% else %}
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                     </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="{% url 'signin' %}">Sign In</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+       <!-- Main container for the content -->
+    <div class="container">
+         <!-- Main container for course details -->
+        <section class="course-detail-container">
+          <!-- Title of the course-->
+            <h1>{{ course.title }}</h1>
+            <!-- If course image exists display image-->
+           {% if course.image %}
+                <img src="{{ course.image.url }}" alt="{{ course.title }}" class="img-fluid mb-3" >
+            {% endif %}
+             <!-- Course description-->
+            <p>{{ course.description }}</p>
+             <!-- if the user is logged in-->
+            {% if user.is_authenticated %}
+                 <!-- if the user is not enrolled in the course show enroll button-->
+                {% if not is_enrolled %}
+                    <a href="{% url 'enroll_course' course.id %}" class="btn btn-success">Enroll Now</a>
+                {% endif %}
+            {% endif %}
+            <!-- Header for lessons-->
+            <h2>Lessons</h2>
+           <!--  unordered list of all the lessons -->
+            <ul>
+                 <!-- loops through all the lessons-->
+                {% for lesson in lessons %}
+                   <!-- list element with a link to the lesson details-->
+                    <li><a href="{% url 'lesson_detail' course.id lesson.id %}">{{ lesson.title }}</a></li>
+                {% endfor %}
+             </ul>
+         </section>
+    </div>
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

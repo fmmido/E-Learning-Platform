@@ -1,0 +1,100 @@
+/* Styles for the body */
+body {
+    font-family: 'Roboto', sans-serif;  /* Sets the font family to Roboto or sans-serif as a fallback */
+    color: #333; /* Sets default text color */
+    background-color: #f9f7f1;  /* Sets default background color */
+}
+
+/* Styles for main headings and display-4 text elements */
+h1, .display-4 {
+    font-size: 2.5rem;  /* Sets the font size for the heading */
+    color: #2d2d2d; /* Sets the color for the heading*/
+}
+
+/* Styles for paragraphs and lead text elements */
+p, .lead {
+    font-size: 1rem;  /* Sets the font size for the paragraph */
+    color: #5e5e5e; /* Sets the color for the paragraph*/
+}
+
+/* Styles for navbar brand*/
+.navbar-brand{
+  color: #3767cf !important; /* Sets the brand color with the !important to ensure it works*/
+}
+
+/* Styles for navbar links */
+.navbar-nav .nav-link {
+  color: #333 !important;  /* Sets link color with the !important to ensure it works*/
+}
+
+/* Specific styling for login form wrapper */
+.wrapper {
+    position: relative; /* Allows to set positioned elements */
+    max-width: 470px;  /* Sets the max width of the form*/
+    width: 100%;  /* Takes 100% of it's parent width */
+    border-radius: 12px;  /* Rounds the corners of the form*/
+    padding: 20px 30px 120px;  /* Sets padding for the form */
+    margin: 20px auto; /* Centers the form horizontally and reduces the top margin */
+    background: rgba(255, 255, 255, 0.9);  /* sets a semi-transparent white background */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);  /* Creates a subtle shadow effect */
+}
+
+/* Styles for the form section */
+.form {
+    padding: 20px 30px;  /* Sets padding for the form elements */
+}
+
+/* Styles for the form header */
+.form header {
+    font-size: 30px;  /* Set the text size for the header*/
+    text-align: center;  /* Centers the header text */
+    color: #3767cf;  /* Sets header color*/
+    font-weight: 600;   /* Sets header to bold*/
+    cursor: pointer; /* Cursor to pointer*/
+    margin-bottom: 0;   /* Removes the default bottom spacing*/
+}
+
+/* Styles for the wrapper form element */
+.wrapper form {
+    display: flex;  /* Uses flexbox layout */
+    flex-direction: column;   /* Make elements display one under the other */
+    gap: 20px;   /* Adds spacing between elements */
+    margin-top: 40px;  /* Add top margin to form */
+}
+
+/* Styles for all input elements inside the form */
+form input {
+    height: 60px; /* Fix input height */
+    outline: none;  /* Removes input default outline */
+    border: none;  /* Removes input borders */
+    padding: 0 15px;  /* Adds padding to inputs */
+    font-size: 16px;  /* Sets font size for inputs */
+    font-weight: 400;  /* Sets font weight for inputs */
+    color: #333;  /* Sets text color for inputs */
+    border-radius: 8px;  /* Rounds the corners of the input fields */
+    background: #f0f0f0; /* Set the background color of the input fields */
+}
+
+/* Styles for all link elements inside the form */
+form a {
+    color: #333;   /* Sets link color */
+    text-decoration: none;   /* Removes default text decoration */
+}
+
+/* Styles for the link elements inside the form when hovering */
+form a:hover {
+    text-decoration: underline;  /* underlines link on hover */
+}
+
+/* Styles for submit button inside forms */
+form input[type="submit"] {
+    margin-top: 15px;   /* Add top margin to button */
+    padding: 15px;  /* Add padding to submit button */
+    font-size: 18px;  /* Set font size of submit button */
+    font-weight: 500;   /* Bold weight for submit button */
+    cursor: pointer;  /* Set cursor to pointer on hover */
+    background: #3767cf; /* set submit button background color */
+    color: white; /* Set text color */
+    border: none;   /* Removes default borders */
+    border-radius: 10px;   /* Round the corners */
+}

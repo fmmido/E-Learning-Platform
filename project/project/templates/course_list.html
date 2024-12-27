@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Link to our external CSS -->
+    <style>
+         /* Styles for the main container of course list page */
+        .course-list-container {
+          margin-top: 20px; /* Add spacing from top*/
+           max-width: 1000px;  /* Maximum width for container*/
+          margin-left: auto; /* Centers the container horizontally */
+           margin-right: auto; /* Centers the container horizontally */
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+             padding: 20px;  /* Add padding */
+              border-radius: 10px;  /* Add rounded borders */
+           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);  /* Box shadow for a layered effect */
+        }
+        /* Styles for the page title */
+        .course-list-container h1 {
+            text-align: center;  /* Centers the text */
+             color: #3767cf; /* Set text color */
+            font-weight: 600;  /* Bold weight */
+            margin-bottom: 20px; /* Add spacing from the bottom*/
+        }
+         /* Styles for the create course button */
+        .course-list-container .btn-success {
+           background-color: #28a745 !important;  /* Set success button background color */
+             border-color: #28a745 !important;  /* Sets button border color */
+        }
+        /* Styles for the card container */
+        .course-list-container .card {
+              border: 1px solid #dee2e6; /* Sets card border */
+             border-radius: 10px; /* Sets card rounded corners */
+             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /*  Sets card box-shadow */
+        }
+         /* Styles for the card image */
+        .course-list-container .card-img-top {
+           border-radius: 10px 10px 0 0; /* Rounds the corners on the top of the image */
+            height: 200px; /* Fixes the image height to 200px */
+            object-fit: cover;  /* Cover the container */
+        }
+        /* Styles for card title */
+         .course-list-container .card-title {
+             color: #3767cf; /* Set text color */
+             font-weight: 600; /* Set font weight */
+         }
+         /* Styles for card text */
+          .course-list-container .card-text {
+              color: #5e5e5e;   /* Set text color */
+         }
+         /* Styles for view course button */
+        .course-list-container .btn-primary {
+            background-color: #3767cf !important; /* Sets primary button background color */
+             border-color: #3767cf !important;  /* Sets primary button border color */
+        }
+    </style>
+</head>
+<body>
+     <!-- Navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'index' %}">E-Learning</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+     <div class="collapse navbar-collapse" id="navbarNav">
+         <ul class="navbar-nav ml-auto">
+              <!-- if the user is logged in-->
+            {% if user.is_authenticated %}
+                 <li class="nav-item">
+                     <span class="nav-link">Welcome, {{ user.username }}</span>
+                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'my_courses' %}">My Courses</a>
+                 </li>
+                 <li class="nav-item">
+                      <a class="nav-link" href="{% url 'signout' %}">Sign Out</a>
+                 </li>
+                  <!-- if the user is not logged in-->
+             {% else %}
+                 <li class="nav-item">
+                     <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                 </li>
+                <li class="nav-item">
+                     <a class="nav-link" href="{% url 'signin' %}">Sign In</a>
+                </li>
+             {% endif %}
+         </ul>
+     </div>
+ </nav>
+   <!-- Main container-->
+ <div class="container">
+        <!-- course list container-->
+       <section class="course-list-container">
+          <!-- page title-->
+          <h1>Courses</h1>
+            <!-- if user is staff show create course button-->
+          {% if user.is_authenticated and user.is_staff %}
+                <a href="{% url 'course_create' %}" class="btn btn-success mb-3">Create New Course</a>
+           {% endif %}
+           <!-- Grid of the available courses-->
+         <div class="row">
+            <!-- loop through all courses-->
+             {% for course in courses %}
+                <!-- each element in the row is a card-->
+                 <div class="col-md-4 mb-4">
+                    <!-- Card component -->
+                   <div class="card">
+                       <!-- Course image-->
+                         {% if course.image %}
+                             <img src="{{ course.image.url }}" class="card-img-top" alt="{{ course.title }}">
+                        {% endif %}
+                        <!-- card body-->
+                        <div class="card-body">
+                            <!-- card title-->
+                            <h5 class="card-title">{{ course.title }}</h5>
+                             <!-- course description-->
+                            <p class="card-text">{{ course.description|truncatechars:100 }}</p>
+                            <!-- course view button-->
+                           <a href="{% url 'course_detail' course.id %}" class="btn btn-primary">View Course</a>
+                       </div>
+                   </div>
+              </div>
+             {% endfor %}
+         </div>
+    </section>
+ </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

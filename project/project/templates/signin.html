@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>  <!-- Title of the page -->
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Link to external CSS -->
+</head>
+<body>
+   <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <!-- Navigation bar brand -->
+        <a class="navbar-brand" href="{% url 'index' %}">E-Learning</a>
+        <!-- Navigation bar toggler button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+          <!-- Navigation bar content-->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                 <!-- If the user is logged in -->
+                {% if user.is_authenticated %}
+                     <!-- Navigation item welcome with username-->
+                    <li class="nav-item">
+                        <span class="nav-link">Welcome, {{ user.username }}</span>
+                    </li>
+                    <!-- Navigation item link to my courses -->
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'my_courses' %}">My Courses</a>
+                    </li>
+                     <!-- Navigation item link to signout-->
+                    <li class="nav-item">
+                         <a class="nav-link" href="{% url 'signout' %}">Sign Out</a>
+                   </li>
+                      <!-- If the user is not logged in -->
+                {% else %}
+                    <!-- Navigation item link to signup-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                     <!-- Navigation item link to signin-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signin' %}">Sign In</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!-- Main section for login form -->
+    <section class="wrapper">
+        <!-- Container for the login form-->
+        <div class="form login">
+             <!-- Form header login text-->
+            <header>Login</header>
+               <!-- Form definition, action, method-->
+              <form method="post" action="{% url 'signin' %}">
+                  <!-- django security token-->
+                {% csrf_token %}
+                  <!-- form from django-->
+                {{ form.as_p }}
+                  <!-- forgot password link-->
+                <a href="#">Forgot password?</a>
+                <!-- submit button-->
+                <input type="submit" value="Login" />
+            </form>
+        </div>
+    </section>
+      <!-- Javascript libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

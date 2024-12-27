@@ -1,0 +1,227 @@
+Documentation:
+
+1. your_project/settings.py
+
+Purpose: Configuration file for the Django project.
+
+Key Settings:
+
+BASE_DIR: The base directory of the Django project.
+
+SECRET_KEY: A secret key used for cryptographic hashing. Important: Keep this secret.
+
+DEBUG: A boolean that turns debug mode on/off. In production, it should be set to False.
+
+ALLOWED_HOSTS: A list of valid hostnames for the Django application. Empty by default but should be configured in production.
+
+LOGIN_URL: The URL to redirect to when a user is not logged in (set to /signin/).
+
+INSTALLED_APPS: A list of Django apps used by the project, including 'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', and your custom application 'spApp'.
+
+MIDDLEWARE: A list of middleware classes used to process requests and responses.
+
+ROOT_URLCONF: Location of the project-level urls.py file.
+
+TEMPLATES: Configuration for Django's template engine, including the path to your templates directory.
+
+DATABASES: Database settings, using SQLite in this case.
+
+MEDIA_URL: The URL for accessing user-uploaded media files.
+
+MEDIA_ROOT: The local file path to your media files.
+
+STATIC_URL: The URL to access static files like CSS, JavaScript, and images.
+
+STATICFILES_DIRS: List of directories that contains your static files.
+
+DEFAULT_AUTO_FIELD: Defines the default primary key field type.
+
+2. your_project/urls.py
+
+Purpose: Defines the project-level URL patterns and routes them to different applications.
+
+Key Features:
+
+Imports admin, path, include, settings, and static modules.
+
+urlpatterns: A list of URL patterns:
+
+path('admin/', admin.site.urls): Routes /admin/ URLs to Django's admin application.
+
+path('', include('spApp.urls')): Includes URL patterns from the spApp's urls.py file.
+
+Conditional static media serving: In development mode, it adds serving media files using the static() function.
+
+3. spApp/models.py
+
+Purpose: Defines database models for the application.
+
+Key Models:
+
+Course:
+
+title: A CharField for the course title.
+
+description: A TextField for the course description.
+
+instructor: A ForeignKey to the User model (built-in), with cascading deletes.
+
+image: An ImageField for course images (nullable).
+
+created_at: A DateTimeField recording creation time.
+
+__str__(): Method to return the title.
+
+Lesson:
+
+course: A ForeignKey to the Course model with related name to access its lessons, with cascading deletes.
+
+title: A CharField for the lesson title.
+
+content: A TextField for the lesson content.
+
+order: An IntegerField to define the order of the lesson in the course.
+
+__str__(): Method to return the title.
+
+Enrollment:
+
+student: A ForeignKey to the User model with related name to access enrollments of a user, with cascading deletes.
+
+course: A ForeignKey to the Course model with related name to access enrollments of a course, with cascading deletes.
+
+enrollment_date: A DateTimeField recording the enrollment time.
+
+__str__(): Method to represent the enrollment as text
+
+4. spApp/views.py
+
+Purpose: Handles HTTP requests and returns HTTP responses by rendering templates.
+
+Key Views:
+
+index(request): Renders the main landing page (index.html).
+
+signup(request): Handles user registration, renders the signup page, and handles form submissions by saving the user and logging them in.
+
+signin(request): Handles user login using Django's AuthenticationForm and authenticates and logs in the user.
+
+signout(request): Handles user logout.
+
+course_list(request): Renders a list of courses (course_list.html).
+
+course_detail(request, course_id): Renders a specific course details (course_detail.html), including its lessons and enrollment status.
+
+lesson_detail(request, course_id, lesson_id): Renders details of a specific lesson (lesson_detail.html).
+
+enroll_course(request, course_id): Allows logged-in users to enroll in courses.
+
+my_courses(request): Shows a list of courses a logged-in user is enrolled in (my_courses.html).
+
+course_create(request): Handles creation of a new course and a new first lesson, using CourseForm and LessonForm. The view also checks if the user is a staff member to be able to create a course.
+
+test_user(request): Renders the test_user.html template to test user authentication and the is_staff attribute.
+
+Decorators:
+
+@login_required: Ensures that certain views are only accessible to logged-in users (e.g. enroll_course, my_courses and course_create).
+
+5. spApp/urls.py
+
+Purpose: Defines the app-level URL patterns and maps them to specific views within the spApp app.
+
+Key Features:
+
+path('', views.index, name='index'): Maps the root URL to the index view.
+
+path('signup/', views.signup, name='signup'): Maps /signup/ to the signup view.
+
+path('signin/', views.signin, name='signin'): Maps /signin/ to the signin view.
+
+path('signout/', views.signout, name='signout'): Maps /signout/ to the signout view.
+
+path('courses/', views.course_list, name='course_list'): Maps /courses/ to the course_list view.
+
+path('courses/<int:course_id>/', views.course_detail, name='course_detail'): Maps /courses/<course_id>/ to the course_detail view with a dynamic parameter.
+
+path('courses/<int:course_id>/lessons/<int:lesson_id>/', views.lesson_detail, name='lesson_detail'): Maps /courses/<course_id>/lessons/<lesson_id>/ to the lesson_detail view, with multiple dynamic parameters.
+
+path('courses/<int:course_id>/enroll/', views.enroll_course, name='enroll_course'): Maps /courses/<course_id>/enroll/ to the enroll_course view with a dynamic parameter.
+
+path('my-courses/', views.my_courses, name='my_courses'): Maps /my-courses/ to the my_courses view.
+
+path('courses/create/', views.course_create, name='course_create'): Maps /courses/create/ to the course_create view.
+
+path('test-user/', views.test_user, name='test_user'): Maps /test-user/ to the test_user view.
+
+6. spApp/forms.py
+
+Purpose: Defines forms for user input, handling validation and data processing.
+
+Key Forms:
+
+CustomUserCreationForm: A custom form for creating users, it is extended from the Django default form, but does not contain extra fields.
+
+CourseForm: A ModelForm for creating and updating Course objects (includes title, description, instructor, and image fields).
+
+LessonForm: A ModelForm for creating and updating Lesson objects (includes title, content, and order fields).
+
+7. spApp/templates/
+
+Purpose: Contains all HTML templates for your application.
+
+Key Templates:
+
+index.html: The main landing page.
+
+signup.html: User registration form.
+
+signin.html: User login form.
+
+course_list.html: Displays a list of courses.
+
+course_detail.html: Displays details of a specific course.
+
+lesson_detail.html: Displays details of a specific lesson.
+
+my_courses.html: Displays a list of enrolled courses for a logged-in user.
+
+course_create.html: Allows authenticated users with is_staff to create courses and lessons.
+
+test_user.html: Displays user authentication status (for debugging).
+
+8. spApp/static/
+
+Purpose: Holds static files like CSS, JavaScript, and static images.
+
+Key Files:
+
+css/styles.css: External CSS file with project-wide styles.
+
+images/: Contains static images (like default background images).
+
+9. media/
+
+Purpose: Stores user uploaded files (e.g. course images).
+
+Key Features:
+
+course_images/: Contains uploaded course images.
+
+10. manage.py
+
+Purpose: Django's command-line utility for administrative tasks.
+
+11. db.sqlite3
+
+Purpose: SQLite database file for the project, it stores all the information and models, such as users, courses, lessons, etc.
+
+How to Use this Documentation:
+
+Familiarize Yourself: Read through this documentation to understand the structure and function of each part of your Django project.
+
+Reference: Use this as a reference guide when you need to understand how a particular component works or to make adjustments to the project.
+
+Share: This documentation can be shared with other team members or developers to help them get up to speed quickly.
+
+This thorough documentation will help you, and others working with your project, navigate, understand, and modify the project. If you have any questions, or want more details on a particular section, just let me know!
