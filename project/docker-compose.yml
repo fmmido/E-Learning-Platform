@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+    web:
+        build: .
+        command: gunicorn project.wsgi:application --bind 0.0.0.0:8000 --workers 3
+        volumes:
+            - .:/app
+        ports:
+            - "8000:8000"
+        environment:
+            - DJANGO_SETTINGS_MODULE=project.settings
+
+    nginx:
+        image: nginx:latest
+        volumes:
+            - .:/app  # ربط مجلد التطبيق
+            - ./nginx.conf:/etc/nginx/nginx.conf  # ربط ملف إعدادات Nginx
+            - ./project/staticfiles:/app/staticfiles  # ربط ملفات static
+            - ./project/media:/app/media  # ربط ملفات media
+        ports:
+            - "80:80"  # فتح منفذ HTTP
+        depends_on:
+            - web  # التأكد من أن Nginx يعتمد على خدمة Django

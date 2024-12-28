@@ -20,7 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # TEMPLATES_DIR defines the path to the templates directory
 TEMPLATES_DIR = BASE_DIR / "project/templates"
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -33,7 +32,7 @@ SECRET_KEY = 'django-insecure-o4gkync!zq49gc)bv@!1hlb0i_@!1p_9pyd+m94i-@y!-8b+93
 DEBUG = True
 
 # ALLOWED_HOSTS defines the allowed hostnames for the Django application
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # LOGIN_URL is the url to redirect when the user is not logged in
 LOGIN_URL = '/signin/'
@@ -42,23 +41,23 @@ LOGIN_URL = '/signin/'
 # INSTALLED_APPS lists all the applications that django will use
 INSTALLED_APPS = [
     'django.contrib.admin',  # Django admin application
-    'django.contrib.auth',   # Django authentication application
-    'django.contrib.contenttypes', # Django contenttypes application
-    'django.contrib.sessions',   # Django sessions application
+    'django.contrib.auth',  # Django authentication application
+    'django.contrib.contenttypes',  # Django contenttypes application
+    'django.contrib.sessions',  # Django sessions application
     'django.contrib.messages',  # Django message framework
-    'spApp', # Your custom app
+    'spApp',  # Your custom app
     'django.contrib.staticfiles',  # Django static files application
 ]
 
 # MIDDLEWARE defines the components that will modify requests and responses
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',  # Security middleware
-    'django.contrib.sessions.middleware.SessionMiddleware', # Sessions middleware
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Sessions middleware
     'django.middleware.common.CommonMiddleware',  # Common middleware
-    'django.middleware.csrf.CsrfViewMiddleware', # CSRF middleware
+    'django.middleware.csrf.CsrfViewMiddleware',  # CSRF middleware
     'django.contrib.auth.middleware.AuthenticationMiddleware',  # Authentication middleware
     'django.contrib.messages.middleware.MessageMiddleware',  # Message middleware
-    'django.middleware.clickjacking.XFrameOptionsMiddleware', # Clickjacking protection middleware
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',  # Clickjacking protection middleware
 ]
 
 # ROOT_URLCONF defines where django should look for the root urls
@@ -68,14 +67,14 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Template engine
-        'DIRS': [TEMPLATES_DIR], #  Directory where Django should search for templates
-        'APP_DIRS': True, # If templates should be found within the apps
+        'DIRS': [TEMPLATES_DIR],  # Directory where Django should search for templates
+        'APP_DIRS': True,  # If templates should be found within the apps
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug', # debug processor
-                'django.template.context_processors.request', # Request processor
-                'django.contrib.auth.context_processors.auth', # Authentication processor
-                'django.contrib.messages.context_processors.messages', # Message processor
+                'django.template.context_processors.debug',  # debug processor
+                'django.template.context_processors.request',  # Request processor
+                'django.contrib.auth.context_processors.auth',  # Authentication processor
+                'django.contrib.messages.context_processors.messages',  # Message processor
             ],
         },
     },
@@ -89,8 +88,8 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # DATABASES defines database configurations for django project
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Database engine
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), # Database name
+        'ENGINE': 'django.db.backends.sqlite3',  # Database engine
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),  # Database name
     }
 }
 
@@ -106,7 +105,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # AUTH_PASSWORD_VALIDATORS lists password validators
 AUTH_PASSWORD_VALIDATORS = []
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 # LANGUAGE_CODE defines the language of django
@@ -121,18 +119,19 @@ USE_I18N = True
 # USE_TZ determines if django should use time zones
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 # STATIC_URL is the url to access static files
 STATIC_URL = '/static/'
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 # STATICFILES_DIRS is a list of paths that django will search for static files
 STATICFILES_DIRS = [
-    BASE_DIR / "project/static",  # Adjust this path to your static files
+    BASE_DIR / "project/static",
 ]
 
-# Default primary key field type
+# Default primary key field typeش
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 # DEFAULT_AUTO_FIELD defines the type of the default primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
