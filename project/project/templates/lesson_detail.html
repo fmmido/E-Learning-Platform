@@ -1,91 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ lesson.title }}</title>
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Link to our external CSS -->
-    <style>
-      /* Styles for the main container of lesson details page*/
-         .lesson-detail-container {
-           margin-top: 20px;   /* Add spacing from the top */
-           max-width: 800px;    /* Set the max width of the container */
-           margin-left: auto;  /* Center the container horizontally */
-           margin-right: auto; /* Center the container horizontally */
-            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-           padding: 20px;   /* Add spacing for padding */
-              border-radius: 10px;   /* Sets rounded corners */
-           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /*  box shadow for layered effect */
-         }
-        /* Styles for lesson header */
-        .lesson-detail-container h1 {
-           text-align: center; /* Centers the text */
-             color: #3767cf; /* Set text color */
-           font-weight: 600; /* Bold weight */
-             margin-bottom: 20px; /* Add spacing from the bottom*/
+{% extends 'base.html' %}
 
-        }
-         /* Styles for lesson content */
-        .lesson-detail-container p {
-           color: #5e5e5e; /* Set text color */
-            line-height: 1.6; /* Add spacing between lines */
-         }
-        /* Styles for back to course button */
-        .lesson-detail-container .btn-secondary {
-           background-color: #6c757d !important; /* Set secondary button background color */
-            border-color: #6c757d !important; /* Set secondary button border color */
-           margin-top: 20px; /* Add spacing from the top*/
-         }
+{% block title %}{{ lesson.title }}{% endblock %}
 
-    </style>
-</head>
-<body>
-    <!-- Navigation bar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="{% url 'index' %}">E-Learning</a>
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                 <!-- Check if the user is logged in -->
-                {% if user.is_authenticated %}
-                      <li class="nav-item">
-                        <span class="nav-link">Welcome, {{ user.username }}</span>
-                    </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'my_courses' %}">My Courses</a>
-                     </li>
-                    <li class="nav-item">
-                         <a class="nav-link" href="{% url 'signout' %}">Sign Out</a>
-                    </li>
-                    <!-- if user is not logged in -->
-                {% else %}
-                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-                    </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="{% url 'signin' %}">Sign In</a>
-                    </li>
-                {% endif %}
-            </ul>
+{% block content %}
+    <section class="lesson-detail-container">
+        <h1>{{ lesson.title }}</h1>
+        <p>{{ lesson.content }}</p>
+        <div style="display: flex; gap: 10px;">
+           {% if lesson.pdf_material %}
+               <a href="{{ lesson.pdf_material.url }}" download class="btn btn-info">Download Material</a>
+           {% endif %}
+           <a href="{% url 'course_detail' course.id %}" class="btn btn-secondary">Back to Course</a>
         </div>
-    </nav>
-     <!-- Main container-->
-    <div class="container">
-          <!-- Lesson detail main container -->
-         <section class="lesson-detail-container">
-             <!-- Lesson title -->
-           <h1>{{ lesson.title }}</h1>
-             <!-- Lesson content -->
-            <p>{{ lesson.content }}</p>
-             <!-- Link back to course details -->
-            <a href="{% url 'course_detail' course.id %}" class="btn btn-secondary">Back to Course</a>
-        </section>
-    </div>
-     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+    </section>
+{% endblock %}

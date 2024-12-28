@@ -56,9 +56,9 @@ urlpatterns = [
     # When the url is '/courses/create/', Django will call views.course_create
     # and it will be named course_create
     path('courses/create/', views.course_create, name='course_create'),
-     
-      # This is the URL pattern for a test user page
+    
+    # This is the URL pattern for a test user page
     # When the url is '/test-user/',
     # Django will call views.test_user and it will be named test_user
-     path('test-user/', views.test_user, name='test_user')
+    path('test-user/', views.test_user, name='test_user'),
 ]

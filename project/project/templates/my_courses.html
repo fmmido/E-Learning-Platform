@@ -1,117 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Courses</title>
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Link to our external CSS -->
-     <style>
-        /* Styles for the main container of the page */
-       .my-courses-container {
-           margin-top: 20px; /* Adds spacing from the top */
-          max-width: 800px;  /* Maximum width of the container */
-          margin-left: auto;  /* Centers the container horizontally */
-          margin-right: auto; /* Centers the container horizontally */
-            background: rgba(255, 255, 255, 0.9); /* Sets a semi transparent background */
-             padding: 20px;   /* Adds some spacing */
-               border-radius: 10px; /* Adds rounded corners */
-          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);  /* Adds a layerd box shadow */
+{% extends 'base.html' %}
 
-        }
-         /* Styles for the heading */
-        .my-courses-container h1 {
-           text-align: center; /* Centers the heading */
-             color: #3767cf; /* Sets the brand color to the header */
-             font-weight: 600;
-             margin-bottom: 20px; /* Adds some spacing from the bottom */
+{% block title %}My Courses{% endblock %}
 
-        }
-         /* Styles for the unordered list */
-        .my-courses-container ul {
-                padding-left: 20px; /* Add padding from the left */
-            list-style-type: none; /* remove default list style type*/
-         }
-        /* Styles for list elements */
-         .my-courses-container li {
-             margin-bottom: 10px;  /* Adds some bottom spacing */
-
-         }
-        /* Styles for links */
-        .my-courses-container a {
-          color: #3767cf;  /* Set brand color for link */
-            text-decoration: none; /* removes underline from links*/
-         }
-        /* Styles for links on hover */
-         .my-courses-container a:hover {
-             text-decoration: underline; /* Shows a underline on hover */
-         }
-        /* Styles for the p tag if user is not enrolled*/
-        .my-courses-container p {
-              color: #5e5e5e; /* Sets the color for the p tag */
-              text-align: center; /* centers the text */
-        }
-
-     </style>
-</head>
-<body>
-     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <a class="navbar-brand" href="{% url 'index' %}">E-Learning</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                 <!-- Check if user is logged in -->
-                {% if user.is_authenticated %}
-                      <li class="nav-item">
-                        <span class="nav-link">Welcome, {{ user.username }}</span>
-                    </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'my_courses' %}">My Courses</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signout' %}">Sign Out</a>
-                   </li>
-                  <!-- if user is not logged in -->
-                {% else %}
-                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signin' %}">Sign In</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-      <!-- Main container -->
-    <div class="container">
-           <!-- My courses container -->
-        <section class="my-courses-container">
-          <!-- My courses header -->
-            <h1>My Courses</h1>
-             <!-- check if enrollments is not empty-->
-           {% if enrollments %}
-               <!-- unordered list for all enrollments-->
-               <ul>
+{% block content %}
+    <section class="my-courses-container">
+        <h1>My Courses</h1>
+        {% if enrollments %}
+            <ul>
                 {% for enrollment in enrollments %}
-                     <!-- list item with a link to the course -->
                     <li>
-                         <a href="{% url 'course_detail' enrollment.course.id %}">{{ enrollment.course.title }}</a>
+                        <a href="{% url 'course_detail' enrollment.course.id %}">{{ enrollment.course.title }}</a>
                     </li>
                 {% endfor %}
-              </ul>
-               <!-- if the user is not enrolled in any course-->
-            {% else %}
-              <!-- Message when the user is not enrolled in any course-->
-                <p> You are not enrolled in any courses yet, please, <a href="{% url 'course_list' %}"> browse the courses </a> to enroll in some. </p>
-            {% endif %}
-        </section>
-    </div>
-     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+            </ul>
+        {% else %}
+            <p> You are not enrolled in any courses yet, please, <a href="{% url 'course_list' %}"> browse the courses </a> to enroll in some. </p>
+        {% endif %}
+    </section>
+{% endblock %}
