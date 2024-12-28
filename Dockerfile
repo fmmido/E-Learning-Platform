@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV PATH="/usr/local/bin:$PATH"
 
 # Copy the application code into the container
-COPY . .
+COPY ./project .
 
 # Install Gunicorn
 RUN pip install gunicorn
