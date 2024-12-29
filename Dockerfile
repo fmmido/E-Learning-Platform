@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./project /app
 
-RUN mkdir -p /app/static /app/media
+RUN mkdir -p /app/static /app/media /app/staticfiles
 
 RUN chmod -R 755 /app/static /app/media /app/staticfiles
 
