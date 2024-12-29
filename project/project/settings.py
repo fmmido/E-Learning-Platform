@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 # MIDDLEWARE defines the components that will modify requests and responses
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',  # Security middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise middleware for serving static files
     'django.contrib.sessions.middleware.SessionMiddleware',  # Sessions middleware
     'django.middleware.common.CommonMiddleware',  # Common middleware
     'django.middleware.csrf.CsrfViewMiddleware',  # CSRF middleware
@@ -124,14 +125,16 @@ USE_TZ = True
 # STATIC_URL is the url to access static files
 STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# The directory where static files will be stored
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# STATICFILES_DIRS is a list of paths that django will search for static files
+# If you're serving static files in a production environment, add this
 STATICFILES_DIRS = [
-    BASE_DIR / "project/static",
+    os.path.join(BASE_DIR, 'static'),  # Adjust if your static files are elsewhere
 ]
 
 # Default primary key field typeش
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 # DEFAULT_AUTO_FIELD defines the type of the default primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
