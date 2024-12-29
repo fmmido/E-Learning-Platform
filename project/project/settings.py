@@ -128,9 +128,8 @@ STATIC_URL = '/static/'
 # The directory where static files will be stored
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# If you're serving static files in a production environment, add this
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Adjust if your static files are elsewhere
+    os.path.join(BASE_DIR, 'project/static'),  # Adjust this path according to your project structure
 ]
 
 # Default primary key field typeش

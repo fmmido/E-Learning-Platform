@@ -1,28 +1,37 @@
 FROM python:3.11
 
-# تعيين مجلد العمل
+# Set the working directory
 WORKDIR /app
 
-# نسخ ملف المتطلبات من المسار الصحيح
+# Copy the requirements.txt file
 COPY ./project/requirements.txt /app/requirements.txt
 
-# تثبيت المتطلبات (بما في ذلك gunicorn)
+# Install dependencies (including gunicorn and whitenoise)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# تثبيت gunicorn (اختياري، فقط إذا لم يكن موجودًا في requirements.txt)
-RUN pip install --no-cache-dir gunicorn
-RUN pip install whitenoise
+# Optionally, install gunicorn and whitenoise if not included in requirements.txt
+# RUN pip install --no-cache-dir gunicorn
+# RUN pip install --no-cache-dir whitenoise
 
-# نسخ ملفات المشروع
+# Copy project files into the container
 COPY ./project /app
 
-COPY ./project/media /app/media
+# Create necessary directories for static and media files
+RUN mkdir -p /app/static /app/media
+
+# Set permissions for static and media directories
+RUN chmod -R 755 /app/static /app/media /app/staticfiles
 
 COPY ./project/static /app/static
 
-# إنشاء مجلدات static و media
-RUN mkdir -p /app/media /app/static
-RUN chmod -R 777 /app/media /app/static
+# Copy media files
+COPY ./project/media /app/media
 
-# تأكد من أن gunicorn يعمل بشكل صحيح
+# Collect static files for production
+RUN python manage.py collectstatic --noinput
+
+# Expose the port that Gunicorn will run on
+EXPOSE 8000
+
+# Start the application with Gunicorn
 CMD ["gunicorn", "project.wsgi:application", "--bind", "0.0.0.0:8000"]
