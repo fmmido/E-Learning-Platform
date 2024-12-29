@@ -1,0 +1,28 @@
+Fonts used in this design:
+
+Font: Metropolis
+Author: Chris Simpson
+Url: https://www.fontsquirrel.com/fonts/metropolis
+
+EDUCATION DAY
+Font>>>> Metropolis
+Style>>> Black
+Color>>> #ffffff
+
+Learn anytime, anywhere
+Font>>>> Metropolis
+Style>>> Regular
+Color>>> #ffffff
+
+Home     Classroom
+Font>>>> Metropolis
+Style>>> SemiBold
+Color>>> #ffffff
+
+Sign Up
+Font>>>> Metropolis
+Style>>> Extra Bold
+Color>>> #766ce7 
+
+Background
+Color>>> #766ce7 + #fd881f

@@ -1,0 +1,42 @@
+Fonts used in this design:
+
+Font: Metropolis
+Author: Chris Simpson
+Url: https://www.fontsquirrel.com/fonts/metropolis
+
+Welcome to ــــــــــــــــ
+Font>>>> Metropolis
+Style>>> Black
+Color>>> #ffffff
+
+The ـــــــــــــ platform gives
+Font>>>> Metropolis
+Style>>> Regular
+Color>>> #ffffff
+
+user login
+Font>>>> Metropolis
+Style>>> SemiBold
+Color>>> #766ce7
+
+USER NAME
+Font>>>> Metropolis
+Style>>> SemiBold
+Color>>> #766ce7
+Opacity>>> 50%
+
+Forgot password? ,,,,,, Remember 
+Font>>>> Metropolis
+Style>>> Light
+Color>>> #999999
+Opacity>>> 50%
+
+login
+Font>>>> Metropolis
+Style>>> Extra Bold
+Color>>> #ffffff 
+Background
+Color>>> #766ce7 + #fd881f
+________________________________________________________________________
+Background
+Color>>> #766ce7 + #fd881f
