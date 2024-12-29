@@ -22,6 +22,7 @@ RUN mkdir -p /app/static /app/media
 # Set permissions for static and media directories
 RUN chmod -R 755 /app/static /app/media /app/staticfiles
 
+
 COPY ./project/static /app/static
 
 # Copy media files
