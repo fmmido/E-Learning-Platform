@@ -10,7 +10,7 @@
            {% if lesson.pdf_material %}
                <a href="{{ lesson.pdf_material.url }}" download class="btn btn-info">Download Material</a>
            {% endif %}
-           <a href="{% url 'course_detail' course.id %}" class="btn btn-secondary">Back to Course</a>
+           <a href="{% url 'course_detail' course.id %}" class="btn btn-info">Back to Course</a>
         </div>
     </section>
 {% endblock %}
