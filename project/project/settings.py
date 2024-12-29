@@ -20,22 +20,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # TEMPLATES_DIR defines the path to the templates directory
 TEMPLATES_DIR = BASE_DIR / "project/templates"
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY is used to generate cryptographic hashes, it should be secret and unique
 SECRET_KEY = 'django-insecure-o4gkync!zq49gc)bv@!1hlb0i_@!1p_9pyd+m94i-@y!-8b+93'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG determines if the project is in debug mode. Should be False in production
 DEBUG = True
 
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = False
+
 # ALLOWED_HOSTS defines the allowed hostnames for the Django application
 ALLOWED_HOSTS = ["*"]
 
 # LOGIN_URL is the url to redirect when the user is not logged in
 LOGIN_URL = '/signin/'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://skillhub.koyeb.app',
+]
 
 # Application definition
 # INSTALLED_APPS lists all the applications that django will use
