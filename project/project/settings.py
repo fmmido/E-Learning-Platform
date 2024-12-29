@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-o4gkync!zq49gc)bv@!1hlb0i_@!1p_9pyd+m94i-@y!-8b+93
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG determines if the project is in debug mode. Should be False in production
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS defines the allowed hostnames for the Django application
 ALLOWED_HOSTS = ["*"]
