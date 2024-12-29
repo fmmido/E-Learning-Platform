@@ -18,9 +18,9 @@ RUN mkdir -p /app/static /app/media
 RUN chmod -R 755 /app/static /app/media /app/staticfiles
 
 
-COPY ./project/static /app/static
-
-COPY ./project/media /app/media
+# COPY ./project/static /app/static
+#
+# COPY ./project/media /app/media
 
 RUN python manage.py collectstatic --noinput
 
