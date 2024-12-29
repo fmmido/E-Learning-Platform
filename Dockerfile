@@ -16,6 +16,10 @@ RUN pip install whitenoise
 # نسخ ملفات المشروع
 COPY ./project /app
 
+COPY ./project/media /app/media
+
+COPY ./project/static /app/static
+
 # إنشاء مجلدات static و media
 RUN mkdir -p /app/media /app/static
 RUN chmod -R 777 /app/media /app/static
